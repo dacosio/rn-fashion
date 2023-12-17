@@ -1,4 +1,4 @@
-# Project Titl
+# Project Title
 
 Fashion Mobile App built with React Native
 

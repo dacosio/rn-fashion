@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useCallback } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Onboarding from "./src/Authentication/Onboarding";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View, Text } from "react-native";
+
+const AuthenticationStack = createNativeStackNavigator();
+
+const AuthenticationNavigator = () => {
+  let [fontsLoaded] = useFonts({
+    bold: require("./assets/fonts/SF-Pro-Text-Bold.otf"),
+    semiBold: require("./assets/fonts/SF-Pro-Text-Semibold.otf"),
+    regular: require("./assets/fonts/SF-Pro-Text-Regular.otf"),
+  });
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) await SplashScreen.hideAsync();
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) return null;
+
+  return (
+    <AuthenticationStack.Navigator screenOptions={{ headerShown: false }}>
+      <AuthenticationStack.Screen name="Onboarding" component={Onboarding} />
+    </AuthenticationStack.Navigator>
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <AuthenticationNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

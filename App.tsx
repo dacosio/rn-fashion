@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Onboarding from "./src/Authentication/Onboarding";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { View, Text } from "react-native";
 
 const AuthenticationStack = createNativeStackNavigator();
 
@@ -30,8 +28,8 @@ const AuthenticationNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AuthenticationNavigator />
-    </NavigationContainer>
+      <NavigationContainer>
+        <AuthenticationNavigator />
+      </NavigationContainer>
   );
 }
